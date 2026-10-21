@@ -26,9 +26,21 @@ MySQLStudio 是一个面向日常开发与演示场景的 MySQL 桌面客户端�
 
 > 本项目仅支持 MySQL / MariaDB，不依赖任何商业客户端代码。
 
-## 截图
+## 项目结构
 
-![连接管理](docs/screenshot-connections.png)
+```
+src/
+├─ main/index.js         主进程：连接池、全部 IPC handler、窗口
+├─ preload/index.js      contextBridge 白名单 API（统一清洗 IPC 参数）
+└─ renderer/             Vue 3 渲染层
+   ├─ App.vue            标题栏与主题
+   ├─ store.js           全局状态
+   ├─ styles.css         设计系统 token（双主题）
+   └─ components/        Sidebar / DataPane / StructurePane / QueryPane
+                         DictionaryPane / ErDiagram / ResultSetView …
+build/                   图标与安装说明
+electron-builder.yml     DMG / NSIS / portable 打包配置
+```
 
 ## 下载安装
 
