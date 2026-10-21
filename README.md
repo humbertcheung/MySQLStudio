@@ -26,6 +26,40 @@ MySQLStudio 是一个面向日常开发与演示场景的 MySQL 桌面客户端�
 
 > 本项目仅支持 MySQL / MariaDB，不依赖任何商业客户端代码。
 
+![MySQLStudio 数据视图](docs/screenshot-data.png)
+
+## 界面预览
+
+### 连接管理
+
+支持多连接、记住密码、连接测试，配置保存在本地。
+
+![连接管理](docs/screenshot-connections.png)
+
+### 表数据浏览与编辑
+
+分页、排序、WHERE 筛选、双击编辑、批量删除、导出，列宽可拖拽并记忆。
+
+![表数据视图](docs/screenshot-data.png)
+
+### 数据字典 · 结构视图
+
+按表展示字段、外键与索引，支持搜索与一键导出。
+
+![数据字典结构视图](docs/screenshot-dictionary-structure.png)
+
+### 数据字典 · ER 关系图
+
+按外键引用分层排布，展示全部字段，卡片可拖拽、位置可重置。
+
+![ER 关系图](docs/screenshot-er-diagram.png)
+
+### 导出的 HTML 数据字典
+
+一键导出可离线阅读的 HTML（同时支持 Markdown / CSV），含索引与外键信息。
+
+![导出的 HTML 数据字典](docs/screenshot-dictionary-html.png)
+
 ## 项目结构
 
 ```
