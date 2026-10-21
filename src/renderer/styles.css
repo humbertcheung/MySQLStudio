@@ -1,0 +1,155 @@
+/* ============ MySQLStudio 设计系统 ============
+ * 原始 ramp（primitives）→ 语义 token（roles）→ 组件只引用语义层
+ * Accent: violet（交互/主操作）  状态色与 accent 色相分离 ≥15°
+ */
+
+:root {
+  /* violet accent ramp（hue 恒定 ~268，中段最饱和）*/
+  --violet-3: #b3a1ff;
+  --violet-4: #9c82ff;
+  --violet-5: #8a6bfe;
+  --violet-6: #7c5cfc;
+  --violet-7: #6a4ae0;
+
+  /* red ramp（destructive，与 accent 分离）*/
+  --red-5: #f04438;
+  --red-6: #d92d20;
+
+  /* green / amber 状态 */
+  --green-5: #3dd68c;
+  --amber-5: #fdb022;
+
+  --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Segoe UI', sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, Menlo, monospace;
+
+  --radius-s: 6px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+}
+
+/* ---------- 暗色主题（默认）---------- */
+:root, :root.theme-dark {
+  --bg-page: #101014;
+  --bg-surface: #17171c;
+  --bg-surface-raised: #1e1e25;
+  --bg-hover: #23232b;
+  --bg-active: #2a2a34;
+
+  --border-subtle: #26262e;
+  --border-strong: #35353f;
+
+  --text-primary: #ededf2;
+  --text-secondary: #9b9ba7;
+  --text-tertiary: #62626e;
+  --text-on-accent: #ffffff;
+
+  --accent-solid: var(--violet-6);
+  --accent-solid-hover: var(--violet-5);
+  --accent-text: var(--violet-3);
+  --accent-subtle: rgba(124, 92, 252, 0.16);
+
+  --danger-solid: var(--red-5);
+  --success-text: var(--green-5);
+  --warning-text: var(--amber-5);
+
+  --shadow-card: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
+  --scrollbar-thumb: #35353f;
+}
+
+/* ---------- 浅色主题 ---------- */
+:root.theme-light {
+  --bg-page: #f6f6f8;
+  --bg-surface: #ffffff;
+  --bg-surface-raised: #ffffff;
+  --bg-hover: #eeeef2;
+  --bg-active: #e4e4ec;
+
+  --border-subtle: #e5e5ec;
+  --border-strong: #d2d2dd;
+
+  --text-primary: #1a1a22;
+  --text-secondary: #5d5d6b;
+  --text-tertiary: #8f8f9d;
+  --text-on-accent: #ffffff;
+
+  --accent-solid: var(--violet-6);
+  --accent-solid-hover: var(--violet-7);
+  --accent-text: var(--violet-7);
+  --accent-subtle: rgba(124, 92, 252, 0.10);
+
+  --danger-solid: var(--red-6);
+  --success-text: #12805c;
+  --warning-text: #b54708;
+
+  --shadow-card: 0 1px 2px rgba(16,16,20,.05), 0 6px 20px rgba(16,16,20,.06);
+  --scrollbar-thumb: #d2d2dd;
+}
+
+/* ---------- 全局 ---------- */
+* { box-sizing: border-box; }
+
+html, body, #app {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  background: var(--bg-page);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 标题栏拖拽区（hiddenInset 红绿灯留白）*/
+.titlebar-drag {
+  -webkit-app-region: drag;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.titlebar-nodrag { -webkit-app-region: no-drag; }
+
+/* Windows：无红绿灯，右侧为系统窗口按钮（最小化/最大化/关闭）预留空间 */
+html[data-platform='win32'] .traffic-spacer { width: 0; }
+html[data-platform='win32'] .titlebar { padding-right: 150px; }
+
+/* 精致滚动条 */
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background-clip: content-box; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* 卡片 */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-card);
+}
+
+/* 品牌 logo 渐变（oklab 插值，亮度均匀无灰心）*/
+.brand-gradient {
+  background: linear-gradient(in oklab, var(--violet-6), #d44ef0 60%, var(--violet-4));
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-tertiary);
+  height: 100%;
+}
+
+/* 列宽调整手柄 */
+.resize-handle {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 6px;
+  cursor: col-resize; user-select: none; border-right: 2px solid transparent;
+}
+.resize-handle:hover, .resize-handle:active { border-right-color: var(--accent-solid); }

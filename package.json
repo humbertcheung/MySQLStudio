@@ -1,0 +1,40 @@
+{
+  "name": "mysql-studio-web",
+  "version": "2.0.0",
+  "description": "MySQL Studio - a beautiful MySQL GUI client",
+  "main": "out/main/index.js",
+  "author": "Humbert Cheung",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humbertcheung/MySQLStudio.git"
+  },
+  "homepage": "https://github.com/humbertcheung/MySQLStudio",
+  "bugs": {
+    "url": "https://github.com/humbertcheung/MySQLStudio/issues"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "pack": "electron-vite build && electron-builder --dir",
+    "dist": "electron-vite build && electron-builder",
+    "dist:mac": "electron-vite build && electron-builder --mac --universal",
+    "dist:win": "electron-vite build && electron-builder --win nsis --x64",
+    "dist:win:portable": "electron-vite build && electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "vite": "^5.4.0"
+  },
+  "dependencies": {
+    "@vicons/fluent": "^0.13.0",
+    "mysql2": "^3.11.0",
+    "naive-ui": "^2.40.0",
+    "vue": "^3.5.0",
+    "monaco-editor": "^0.52.0"
+  }
+}

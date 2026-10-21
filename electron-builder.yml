@@ -1,0 +1,63 @@
+appId: com.humbert.mysqlstudio
+productName: MySQLStudio
+directories:
+  output: release
+files:
+  - out/**
+  - package.json
+extraResources:
+  - from: build/安装说明.txt
+    to: 安装说明.txt
+mac:
+  icon: build/icon.icns
+  target:
+    - target: dmg
+      arch:
+        - universal
+  category: public.app-category.developer-tools
+  # 签名证书由 electron-builder 自动发现；也可通过 CSC_NAME / CSC_LINK 环境变量指定
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  artifactName: MySQLStudio-${version}-${arch}.${ext}
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+  executableName: MySQLStudio
+nsis:
+  artifactName: MySQLStudio-${version}-win-${arch}.${ext}
+  oneClick: false                       # 提供安装向导（可选安装目录）
+  perMachine: false                     # 默认当前用户安装，无需管理员
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: MySQLStudio
+  language: 2052                        # 简体中文
+  uninstallDisplayName: MySQLStudio
+  deleteAppDataOnUninstall: false       # 卸载保留连接配置
+  runAfterFinish: true
+portable:
+  artifactName: MySQLStudio-${version}-portable-${arch}.${ext}
+  # 固定解包目录：同一版本重复启动直接复用，避免每次解压 500MB+
+  unpackDirName: MySQLStudio-2.0.0
+  requestExecutionLevel: user
+dmg:
+  title: MySQLStudio ${version}
+  contents:
+    - x: 130
+      y: 150
+      type: file
+    - x: 390
+      y: 150
+      type: link
+      path: /Applications
+    - x: 130
+      y: 300
+      type: file
+      path: build/安装说明.txt
+afterSign: null
